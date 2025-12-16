@@ -1,7 +1,7 @@
 //api anahtarını ve temel url'i burada saklıyoruz, gelecekte değişiklik yapmayı kolaylaştırır
 
 const API_KEY = "aa9d77e3";
-const BASE_URL = "http://www.omdbapi.com/";
+const BASE_URL = "https://www.omdbapi.com/";
 
 /**
  * verilen bir arama terimi ile filmleri arar
@@ -45,6 +45,8 @@ export async function getMovieDetails(imdbID){
 
     const url = `${BASE_URL}?i=${imdbID}&apikey=${API_KEY}`;
 
+    console.log("Detay isteği için oluşturulan URL:", url);
+
     const response = await fetch(url);
     if(!response.ok){
         throw new Error("Film detayları alınırken bir hata oluştu");
@@ -52,7 +54,7 @@ export async function getMovieDetails(imdbID){
 
     const data = await response.json();
 
-    if(data.Respons === "True"){
+    if(data.Response === "True"){
 
         return data; //film detaylarını döndürür
     }
